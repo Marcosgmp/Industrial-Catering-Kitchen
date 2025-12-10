@@ -2,6 +2,13 @@ package factory;
 
 import dao.*;
 import dao.postgresql.PostgresEmpresaClienteDAO;
+import dao.postgresql.PostgresFuncionarioClienteDAO;
+import dao.postgresql.PostgresContratoDAO;
+import dao.postgresql.PostgresRefeicaoDAO;
+import dao.postgresql.PostgresConsomeDAO;
+import dao.postgresql.PostgresFuncionarioDAO;
+import dao.postgresql.PostgresOcorrenciaDAO;
+import dao.postgresql.PostgresProduzDAO;
 import util.ConnectionFactory;
 
 public class PostgresDAOFactory extends DAOFactory {
@@ -15,36 +22,36 @@ public class PostgresDAOFactory extends DAOFactory {
 
     @Override
     public FuncionarioClienteDAO getFuncionarioClienteDAO() {
-        throw new UnsupportedOperationException("Implementar depois.");
+        return new PostgresFuncionarioClienteDAO(connectionFactory);
     }
 
     @Override
     public ContratoDAO getContratoDAO() {
-        throw new UnsupportedOperationException("Implementar depois.");
+        return new PostgresContratoDAO(connectionFactory);
     }
 
     @Override
     public RefeicaoDAO getRefeicaoDAO() {
-        throw new UnsupportedOperationException("Implementar depois.");
+        return new PostgresRefeicaoDAO(connectionFactory);
     }
 
     @Override
     public ConsomeDAO getConsomeDAO() {
-        throw new UnsupportedOperationException("Implementar depois.");
+        return new PostgresConsomeDAO(connectionFactory);
     }
 
     @Override
     public FuncionarioDAO getFuncionarioDAO() {
-        throw new UnsupportedOperationException("Implementar depois.");
+        return new PostgresFuncionarioDAO(connectionFactory);  // <-- aqui
     }
 
     @Override
     public OcorrenciaDAO getOcorrenciaDAO() {
-        throw new UnsupportedOperationException("Implementar depois.");
+        return new PostgresOcorrenciaDAO(connectionFactory);
     }
 
     @Override
     public ProduzDAO getProduzDAO() {
-        throw new UnsupportedOperationException("Implementar depois.");
+        return new PostgresProduzDAO(connectionFactory);
     }
 }
