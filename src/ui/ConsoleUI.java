@@ -5,6 +5,8 @@ import dao.EmpresaClienteDAO;
 import dao.FuncionarioDAO;
 import factory.DAOFactory;
 import model.EmpresaCliente;
+import model.Contrato;
+import java.time.LocalDate;
 import model.Funcionario;
 
 import java.util.List;
