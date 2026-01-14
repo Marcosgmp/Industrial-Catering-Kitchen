@@ -9,7 +9,6 @@ import dao.FuncionarioDAO;
 import dao.OcorrenciaDAO;
 import dao.ProduzDAO;
 
-// Abstração + polimorfismo: cliente usa apenas esta interface
 public abstract class DAOFactory {
 
     public static final int POSTGRES = 1;
