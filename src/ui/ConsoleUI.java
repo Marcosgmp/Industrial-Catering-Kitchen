@@ -1,6 +1,13 @@
 package ui;
 
 import factory.DAOFactory;
+<<<<<<< HEAD
+=======
+import model.EmpresaCliente;
+import model.Contrato;
+import java.time.LocalDate;
+import model.Funcionario;
+>>>>>>> af59f2874bab788d7ac706c2d42bcd213fd2e219
 
 import java.util.Scanner;
 
