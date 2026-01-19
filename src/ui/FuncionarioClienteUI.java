@@ -46,7 +46,6 @@ public class FuncionarioClienteUI {
         } while (opcao != 0);
     }
 
-    // ==== CRUD FUNCIONÁRIO_CLIENTE ====
 
     private void criarFuncionarioCliente() {
         System.out.println("--- Cadastro de Funcionário do Cliente ---");
@@ -145,7 +144,6 @@ public class FuncionarioClienteUI {
         System.out.println("Funcionário do cliente excluído (se existia).");
     }
 
-    // ==== Utilitários ====
 
     private int lerInt(String msg) {
         while (true) {

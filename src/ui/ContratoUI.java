@@ -21,8 +21,7 @@ public class ContratoUI {
         this.empresaDAO = empresaDAO;
     }
 
-    // MUDANÇA PRINCIPAL: menu() ao invés de menuContratos()
-    public void menu() {  // ← CORRIGIDO
+    public void menu() {
         int opcao;
         do {
             System.out.println("===== MENU CONTRATOS =====");

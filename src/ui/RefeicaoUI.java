@@ -47,7 +47,6 @@ public class RefeicaoUI {
         } while (opcao != 0);
     }
 
-    // ==== CRUD REFEIÇÃO ====
 
     private void criarRefeicao() {
         System.out.println("--- Cadastro de Refeição ---");
@@ -66,7 +65,7 @@ public class RefeicaoUI {
         String horaStr = lerString("Horário (HH:MM): ");
 
         r.setData(LocalDate.parse(dataStr));
-        r.setHorario(LocalTime.parse(horaStr + ":00")); // simples, adiciona segundos
+        r.setHorario(LocalTime.parse(horaStr + ":00"));
 
         r.setObservacao(lerStringOpcional("Observação: "));
         r.setDescricaoCardapio(lerStringOpcional("Descrição do cardápio: "));
@@ -154,8 +153,6 @@ public class RefeicaoUI {
         refeicaoDAO.delete(id);
         System.out.println("Refeição excluída (se existia).");
     }
-
-    // ==== Utilitários ====
 
     private int lerInt(String msg) {
         while (true) {

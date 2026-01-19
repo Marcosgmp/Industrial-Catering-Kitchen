@@ -48,9 +48,6 @@ public class ProduzUI {
         } while (opcao != 0);
     }
 
-    // ===== CRUD PRODUZ =====
-    // (não há update de chave composta; se precisar, apaga e insere de novo)
-
     private void criarProduz() {
         System.out.println("--- Registrar Produção ---");
 
@@ -133,8 +130,6 @@ public class ProduzUI {
                 .deleteByChaveComposta(idProd, idRef, cpf);
         System.out.println("Produção excluída (se existia).");
     }
-
-    // ===== Utilitários =====
 
     private int lerInt(String msg) {
         while (true) {

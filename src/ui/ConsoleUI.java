@@ -8,7 +8,6 @@ public class ConsoleUI {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    // UIs separados
     private final EmpresaClienteUI empresaUI;
     private final FuncionarioUI funcionarioUI;
     private final ContratoUI contratoUI;
