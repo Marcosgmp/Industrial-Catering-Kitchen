@@ -1,13 +1,23 @@
 package ui;
 
-import jdk.internal.org.objectweb.asm.tree.InsnList;
+import dao.FuncionarioDAO;
 import model.Funcionario;
-
+import dao.postgresql.PostgresFuncionarioDAO;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class FuncionarioUI {
-    private void menuFuncionarios() {
+
+    private final Scanner scanner;
+    private final FuncionarioDAO funcionarioDAO;
+
+    public FuncionarioUI(Scanner scanner, FuncionarioDAO funcionarioDAO) {
+        this.scanner = scanner;
+        this.funcionarioDAO = funcionarioDAO;
+    }
+
+    public void menu() {
         int opcao;
         do {
             System.out.println("===== MENU FUNCIONÁRIOS =====");
@@ -31,20 +41,19 @@ public class FuncionarioUI {
             System.out.println();
         } while (opcao != 0);
     }
+
     private void criarFuncionario() {
         System.out.println("--- Cadastro de Funcionário ---");
         Funcionario f = new Funcionario();
 
         String cpfDigitado = lerString("CPF (apenas números ou com máscara): ");
-        String cpfLimpo = cpfDigitado.replaceAll("\\D", ""); // remove tudo que não é dígito
+        String cpfLimpo = cpfDigitado.replaceAll("\\D", "");
         f.setCpf(cpfLimpo);
         f.setCargo(lerString("Cargo: "));
         f.setEndereco(lerString("Endereço: "));
         f.setTelefone(lerInt("Telefone (apenas números): "));
         f.setSalario(Double.parseDouble(lerString("Salário: ")));
-        // para simplificar, não pedi datas aqui; pode adicionar depois
 
-        InsnList funcionarioDAO;
         funcionarioDAO.insert(f);
         System.out.println("Funcionário cadastrado com CPF: " + f.getCpf());
     }
@@ -66,8 +75,10 @@ public class FuncionarioUI {
         System.out.println("--- Buscar Funcionário ---");
         String cpf = lerString("CPF: ");
         cpf = cpf.replaceAll("\\D", "");
-        Optional<Funcionario> opt = ((dao.postgresql.PostgresFuncionarioDAO) funcionarioDAO)
-                .findByCpf(cpf);
+        dao.postgresql.PostgresFuncionarioDAO postgresDAO =
+                (dao.postgresql.PostgresFuncionarioDAO) funcionarioDAO;
+        Optional<Funcionario> opt = postgresDAO.findByCpf(cpf);
+
         if (opt.isEmpty()) {
             System.out.println("Funcionário não encontrado.");
             return;
@@ -131,8 +142,6 @@ public class FuncionarioUI {
         postgresDAO.deleteByCpf(cpf);
         System.out.println("Funcionário excluído (se existia).");
     }
-
-    // ===== Utilitários de leitura =====
 
     private int lerInt(String msg) {
         while (true) {

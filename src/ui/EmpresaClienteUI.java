@@ -1,20 +1,19 @@
 package ui;
 
 import dao.EmpresaClienteDAO;
-import factory.DAOFactory;
 import model.EmpresaCliente;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class EmpresaUI {
+public class EmpresaClienteUI {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
     private final EmpresaClienteDAO empresaDAO;
 
-    public EmpresaUI(DAOFactory factory) {
-        this.empresaDAO = factory.getEmpresaClienteDAO();
+    public EmpresaClienteUI(Scanner scanner, EmpresaClienteDAO empresaDAO) {
+        this.scanner = scanner;
+        this.empresaDAO = empresaDAO;
     }
 
     public void menu() {
@@ -138,5 +137,28 @@ public class EmpresaUI {
         int id = lerInt("ID da empresa: ");
         empresaDAO.delete(id);
         System.out.println("Empresa excluída (se existia).");
+    }
+
+    // Utilitários locais usando o mesmo Scanner injetado
+    private int lerInt(String msg) {
+        while (true) {
+            try {
+                System.out.print(msg);
+                String linha = scanner.nextLine();
+                return Integer.parseInt(linha.trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Valor inválido, tente novamente.");
+            }
+        }
+    }
+
+    private String lerString(String msg) {
+        System.out.print(msg);
+        return scanner.nextLine().trim();
+    }
+
+    private String lerStringOpcional(String msg) {
+        System.out.print(msg);
+        return scanner.nextLine();
     }
 }

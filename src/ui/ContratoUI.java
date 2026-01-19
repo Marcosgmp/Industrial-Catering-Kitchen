@@ -1,15 +1,28 @@
 package ui;
 
-import factory.DAOFactory;
+import dao.ContratoDAO;
+import dao.EmpresaClienteDAO;
 import model.Contrato;
+import model.EmpresaCliente;  // ← ADICIONADO
 import java.time.LocalDate;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class ContratoUI {
-    private void menu() {
+
+    private final Scanner scanner;
+    private final ContratoDAO contratoDAO;
+    private final EmpresaClienteDAO empresaDAO;
+
+    public ContratoUI(Scanner scanner, ContratoDAO contratoDAO, EmpresaClienteDAO empresaDAO) {
+        this.scanner = scanner;
+        this.contratoDAO = contratoDAO;
+        this.empresaDAO = empresaDAO;
+    }
+
+    // MUDANÇA PRINCIPAL: menu() ao invés de menuContratos()
+    public void menu() {  // ← CORRIGIDO
         int opcao;
         do {
             System.out.println("===== MENU CONTRATOS =====");
@@ -158,5 +171,25 @@ public class ContratoUI {
         System.out.println("Contrato excluído (se existia).");
     }
 
+    private int lerInt(String msg) {
+        while (true) {
+            try {
+                System.out.print(msg);
+                String linha = scanner.nextLine();
+                return Integer.parseInt(linha.trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Valor inválido, tente novamente.");
+            }
+        }
+    }
 
+    private String lerString(String msg) {
+        System.out.print(msg);
+        return scanner.nextLine().trim();
+    }
+
+    private String lerStringOpcional(String msg) {
+        System.out.print(msg);
+        return scanner.nextLine();
+    }
 }

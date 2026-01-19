@@ -9,7 +9,7 @@ public class ConsoleUI {
     private final Scanner scanner = new Scanner(System.in);
 
     // UIs separados
-    private final EmpresaUI empresaUI;
+    private final EmpresaClienteUI empresaUI;
     private final FuncionarioUI funcionarioUI;
     private final ContratoUI contratoUI;
     private final RefeicaoUI refeicaoUI;
@@ -19,9 +19,9 @@ public class ConsoleUI {
     private final ProduzUI produzUI;
 
     public ConsoleUI(DAOFactory factory) {
-        this.empresaUI            = new EmpresaUI(factory);
-        this.funcionarioUI        = new FuncionarioUI(factory);
-        this.contratoUI           = new ContratoUI(factory);
+        this.empresaUI            = new EmpresaClienteUI(scanner, factory.getEmpresaClienteDAO());
+        this.funcionarioUI        = new FuncionarioUI(scanner, factory.getFuncionarioDAO());
+        this.contratoUI           = new ContratoUI(scanner, factory.getContratoDAO(), factory.getEmpresaClienteDAO());
         this.refeicaoUI           = new RefeicaoUI(factory);
         this.funcionarioClienteUI = new FuncionarioClienteUI(factory);
         this.consumoUI            = new ConsumoUI(factory);
@@ -60,11 +60,10 @@ public class ConsoleUI {
         System.out.println("5 - Gerenciar Funcionários do Cliente");
         System.out.println("6 - Gerenciar Consumos");
         System.out.println("7 - Gerenciar Ocorrências");
-        System.out.println("8 - Gerenciar Produção (Produz)");
+        System.out.println("8 - Gerenciar Produção ");
         System.out.println("0 - Sair");
     }
 
-    // utilitário simples só para o menu principal
     private int lerInt(String msg) {
         while (true) {
             try {
